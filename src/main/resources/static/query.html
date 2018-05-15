@@ -1,0 +1,93 @@
+<html>
+<head>
+<title>Run Query</title>
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href = "css/main.css" />
+
+<script
+  src="https://code.jquery.com/jquery-3.3.1.min.js"
+  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+  crossorigin="anonymous"></script>
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.6/angular.js"></script>
+<script src = "https://cdnjs.cloudflare.com/ajax/libs/ngStorage/0.3.11/ngStorage.js"></script>
+<script src = "js/QueryController.js"></script>
+<script src = "js/QueryService.js"></script>
+<script src = "js/AutoCompleteDirective.js"></script>
+</head>
+
+<body ng-app="RunQueryApp" ng-controller="RunQueryController" ng-keydown="closeAutoComplete($event,'keyboard')" 
+           ng-click="closeAutoComplete($event,'mouseclick')">
+<h1>RUN QUERY</h1>
+<form>
+
+   <div class="form-group">
+   <label for="environment">Enter Environment</label>
+   <input type = "text" placeholder = "start typing env.." id="environment" class="form-control" ng-model="querybean.env"
+    ng-change="searchOnInput(querybean.env,'env')" ng-keydown="keySelectFromSuggestion($event,'env')"/>
+    <i ng-show="!querybean.env.length" class="fa fa-search search-icon"></i>
+  </div>
+
+  <customautocomplete ng-show="showSuggestionForEnv"></customautocomplete> 
+    
+  <div class="form-group">
+   <label for="hostname">Enter Host Name</label>
+   <input type = "text" placeholder = "Host Name" id="hostname" class="form-control" ng-model="querybean.hostname"/>
+  </div>
+  <div class="form-group">
+   <label for="serviceId">Enter Service ID</label>
+   <input type = "text" placeholder = "serviceId" id="serviceId" class="form-control" 
+   ng-model="querybean.serviceId"/>
+   <!-- ng-blur="showSuggestionForServId=false;suggestions.length=0" 
+   ng-change="searchOnInput(querybean.serviceId,'serviceId')" ng-keydown="keySelectFromSuggestion($event,'serviceId')"/>-->
+
+  </div>
+  
+  <!-- <customautocomplete ng-show="showSuggestionForServId"></customautocomplete> -->   
+   
+  <div class="form-group">
+   <label for="username">Enter Username</label>
+   <input type = "text" placeholder = "username" id="username" class="form-control" ng-model="querybean.username"/>
+  </div>
+  <div class="form-group">
+   <label for="pass">Enter Password</label>
+   <input ng-attr-type="{{showPassword?'text':'password'}}" placeholder = "Password" id="pass" class="form-control" ng-model="querybean.password">
+   <i ng-show="querybean.password.length" ng-class="showPasswordClass" class="pass-icon" ng-click="toggleShowHidePassword()"></i>
+   <span toggle="#pass" ></span>
+  </div>
+  
+  <!-- <div class="form-check">
+    <input type="checkbox" class="form-check-input" id="checkBoxId" ng-click="toggleShowHidePassword()">
+    <label class="form-check-label" for="checkBoxId">Show Password</label>
+  </div> -->
+  
+  <div class="form-group queryBox">
+   <label for="query">Enter Query</label>
+   <textarea cols="100" rows="5" id = "query" class="form-control" ng-model="querybean.query"></textarea>
+  </div>
+  
+  <button type="button" class="btn btn-primary" ng-click="runQuery($event)">Run Query</button>
+  <span ng-show="spanShow"><i><b>&nbsp;&nbsp;{{helpText}}</b></i></span>
+</form>
+<label id  = "resultTableLabel" for="resultTable">Query Results:</label>
+
+<div class="loading"></div>
+<table class ="table" id="resultTable">
+ <thead>
+  <tr>
+  <td><b>Query</b></td><td><b>Result</b></td>
+  </tr>
+ </thead>
+ <tbody>
+  <tr ng-repeat="bean in listresult" 
+  ng-style="bean.resultDesc.indexOf('Error')>-1?{'background-color':'#EC7063'}:{'background-color':'#3CB971'}">
+   <td>{{bean.resultType}}</td><td>{{bean.resultDesc}}</td>
+  </tr>
+ </tbody>
+</table>
+</body>
+</html>

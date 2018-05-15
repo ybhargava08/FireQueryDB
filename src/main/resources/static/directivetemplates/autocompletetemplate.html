@@ -1,0 +1,6 @@
+<div class="form-group" ng-show="suggestions.length>0">
+    <ul class="list-group">
+      <li class="list-group-item" ng-class="{customselected: localIndex==$index}" ng-repeat="bean in suggestions" 
+      ng-click="selectFromSuggestion(bean,$event)"  
+      ng-mouseover="handleMouseOver($event,$index)">{{searchparameter === "serviceId" ? bean.serviceId:bean.env}}</li>
+    </ul>

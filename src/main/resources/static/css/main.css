@@ -1,0 +1,110 @@
+h1{
+	text-align:center;
+}
+
+form{
+	margin: 2% 2% 0 15%;
+	width:70%;
+	border-radius: 10px;
+	box-shadow: 5px 5px 20px #9E9B9A;
+	padding : 1%;
+}
+
+.table{
+	border: 2px solid #EAE6E5;
+	border-radius: 10px;
+	box-shadow: 5px 5px 20px #9E9B9A;
+	padding : 1%;
+    margin: -1.5% 2% 2% 15%;
+	width:70%;
+	table-layout:fixed;
+}
+
+#resultTableLabel{
+	font-weight: bold;
+	margin:2% 2% 2% 15%;
+	font-size: 1.2em;
+}
+table th{
+	text-align:center;
+}
+
+.table tr{
+	width:100%;
+}
+.table tr td{
+	position:relative;
+	width: 40%;
+	word-wrap:break-word;
+}
+
+
+table tbody tr {
+	font-size: 0.8em;
+	color:white;
+}
+
+.form-group{
+	width:40%;
+}
+
+.queryBox{
+	width: 80%;
+}
+
+.animateBorderTop {
+	animation: borderloading 3s infinite ease-out;
+}
+
+.list-group {
+	margin:-1.2em 0 0.6em 0;
+}
+
+.customselected {
+	color:#fff;
+	background-image:linear-gradient(to bottom,#337ab7 0,#265a88 100%);
+	cursor:pointer;
+}
+
+.pass-icon,.search-icon{
+	float:right;
+	margin: -1.6em 0.5em 0 0;
+}
+
+.pass-icon:hover {
+	cursor:pointer;
+}
+
+.animateEmpty{
+		animation: animateIfEmpty 1s;
+}
+
+.loading{
+	position:relative;
+	margin: -1% 2% 1.4% 15.4%;
+	width:0;
+	height:2px;
+	background-image:linear-gradient(to bottom,#337ab7 0,#265a88 100%);
+	visibility:visible;
+}	
+
+@keyframes animateIfEmpty{
+    0%,20%,40%,60%,80%{  
+    		transform: translateX(-5px);
+  		}
+   	10%,30%,50%,70%,90%,100%{  
+	 	 transform: translateX(5px);
+  		}	
+}	
+
+@keyframes borderloading{
+	
+	 from{  
+    		width:0;
+    		visibility:visible;
+  		}
+   	to{  
+	 	 width:69%;
+	 	 visibility:visible;
+  		}	
+}

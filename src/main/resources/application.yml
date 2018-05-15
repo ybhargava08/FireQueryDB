@@ -1,0 +1,19 @@
+spring:
+ #resources:
+  #static-locations: file:///C:/Users/ybhargava/SpringCloud/FireQueryReactive/src/main/resources/static
+  #cache:
+   #period: 0
+ h2:
+  console:
+   enabled: true
+ datasource:
+  url: jdbc:h2:file:./suggestions
+  username: sa
+  password: 
+  driver-class-name: org.h2.Driver
+ jpa:
+  hibernate:
+   ddl-auto: update
+   naming:
+    physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+  database-platform: org.hibernate.dialect.H2Dialect
